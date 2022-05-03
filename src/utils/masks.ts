@@ -9,9 +9,9 @@ const cepMask = (e: FormEvent<HTMLInputElement>) => {
   return value;
 };
 
-const dateMask = (e: FormEvent<HTMLInputElement>) => {
-  e.currentTarget.maxLength = 10;
-  let value = e.currentTarget.value;
+const dateMask = (inputValue: string) => {
+  if (inputValue.length > 10) return;
+  let value = inputValue;
   value = value.replace(/\D/g, "");
   value = value.replace(/^(\d{2})(\d{2})(\d)/, "$1/$2/$3");
 
