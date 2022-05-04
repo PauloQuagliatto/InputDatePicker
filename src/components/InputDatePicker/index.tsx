@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import { BsFillCalendarFill } from "react-icons/bs";
-import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+import { useState } from "react";
+import moment from "moment";
 
 import InputWrapper from "./ui/partials/InputWrapper";
 
 import Calendar from "../../utils/classes/Calendar";
-import { dateMask } from "../../utils/masks";
 
 import Container from "./styles";
 import CalendarWrapper from "./ui/partials/CalendarWrapper";
@@ -16,7 +14,15 @@ interface IProps {
 }
 
 const InputDatePicker = ({ inputValue, changeEvent }: IProps) => {
-  let calendar = new Calendar(null, null, "pt-br");
+  const year = moment(inputValue, "DD/MM/YYYY").year();
+  const month = moment(inputValue, "DD/MM/YYYY").month();
+
+  const calendar = new Calendar(
+    isNaN(year) ? null : year,
+    isNaN(month) ? null : month,
+    "pt-br"
+  );
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpenOrClose = () => {

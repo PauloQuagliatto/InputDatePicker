@@ -9,6 +9,7 @@ class Calendar {
   month: Month;
   year: number;
   weekDays: string[] = Array.from({ length: 7 });
+  [Symbol.iterator]: any;
 
   constructor(
     year: number | null = null,
@@ -18,7 +19,7 @@ class Calendar {
     this.today = new Day(null, lang);
     this.year = year ?? this.today.year;
     this.month = new Month(
-      new Date(this.year, (monthNumber || this.today.monthNumber) - 1),
+      new Date(this.year, monthNumber || this.today.monthNumber),
       lang
     );
     this.lang = lang;
@@ -46,19 +47,20 @@ class Calendar {
   }
 
   getMonth(monthNumber: number) {
-    return new Month(new Date(this.year, monthNumber - 1), this.lang);
+    return new Month(new Date(this.year, monthNumber), this.lang);
   }
 
   getPreviousMonth() {
-    if (this.month.number === 1) {
+    console.log(this.month.number);
+    if (this.month.number === 0) {
       return new Month(new Date(this.year - 1, 11), this.lang);
     }
 
-    return new Month(new Date(this.year, this.month.number - 2), this.lang);
+    return new Month(new Date(this.year, this.month.number - 1), this.lang);
   }
 
   getNextMont() {
-    if (this.month.number === 1) {
+    if (this.month.number === 0) {
       return new Month(new Date(this.year + 1, 0), this.lang);
     }
 
@@ -81,19 +83,19 @@ class Calendar {
   }
 
   goToPreviousMonth() {
-    if (this.month.number === 1) return this.goToPreviousYear();
+    if (this.month.number === 0) return this.goToPreviousYear();
 
     this.month = new Month(
-      new Date(this.year, this.month.number - 1 - 1),
+      new Date(this.year, this.month.number - 1),
       this.lang
     );
   }
 
   goToNextMonth() {
-    if (this.month.number === 12) return this.goToNextYear();
+    if (this.month.number === 11) return this.goToNextYear();
 
     this.month = new Month(
-      new Date(this.year, this.month.number + 1 - 1),
+      new Date(this.year, this.month.number + 1),
       this.lang
     );
   }

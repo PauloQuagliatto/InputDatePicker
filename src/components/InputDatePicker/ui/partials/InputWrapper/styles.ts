@@ -20,7 +20,7 @@ const Container = styled.div`
     height: 15px;
 
     font-size: 12px;
-
+    border: none;
     border-radius: 4px;
 
     &:focus {

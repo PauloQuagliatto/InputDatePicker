@@ -14,6 +14,7 @@ const MonthDay = ({ day, value, changeEvent }: IProps) => {
   const isSelected = moment(value, "DD/MM/YYYY").valueOf() === day.timestamp;
 
   const selectDate = () => {
+    console.log(moment(day.timestamp).format("DD/MM/YYYY"));
     changeEvent(moment(day.timestamp).format("DD/MM/YYYY"));
   };
 

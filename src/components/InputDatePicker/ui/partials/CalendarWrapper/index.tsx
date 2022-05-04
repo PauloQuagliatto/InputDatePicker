@@ -19,6 +19,7 @@ const CalendarWrapper = ({ calendar, value, changeEvent }: IProps) => {
   const [headerText, setHeaderText] = useState(
     `${calendar!.month.name.toUpperCase()}, ${calendar!.year}`
   );
+  
   const daysOfTheWeek = [...calendar.weekDays];
 
   const handleChangeMonth = (type: string) => {
@@ -29,7 +30,7 @@ const CalendarWrapper = ({ calendar, value, changeEvent }: IProps) => {
     if (type === "next") {
       calendar.goToNextMonth();
     }
-    console.log(calendar);
+    
     setHeaderText(`${calendar!.month.name.toUpperCase()}, ${calendar!.year}`);
   };
 
